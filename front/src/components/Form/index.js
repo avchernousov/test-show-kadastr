@@ -4,9 +4,8 @@ import TextField  from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { list } from '../../lib/list.js';
 
-const Form = ({ onSearch, options = list }) => {
+const Form = ({ onSearch, options = [] }) => {
   const [inputValue, setInputValue] = useState('');
   return (
     <Card>
