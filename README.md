@@ -9,3 +9,6 @@ python -m venv ./.env
 . ./.env/bin/activate
 # установка зависимостей
 pip install -r requirements.txt
+
+# запуск приложения
+python ./main.py
