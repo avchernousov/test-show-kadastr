@@ -3,6 +3,7 @@ import logging
 import os
 
 import aiohttp_cors as aiohttp_cors
+import numpy as np
 from aiohttp import web
 from rosreestr2coord import Area
 
@@ -14,10 +15,14 @@ def get_poly(request) -> web.Response:
         return web.json_response({"error": "Incorrect parameter"})
     area = Area(cadastr_id)
 
-    data = area.to_geojson_poly()
+    data = json.loads(area.to_geojson_poly())
+    busCoord = np.array(data['geometry']['coordinates'])
+    busCoord = busCoord[..., ::-1]
+    data['geometry']['coordinates'] = busCoord.tolist()
+
     geo_json = {
         "type": "FeatureCollection",
-        "features": [json.loads(data)]
+        "features": [data]
     }
 
     return web.json_response(geo_json)
@@ -53,20 +58,20 @@ def init_app():
     index_url = cors.add(app.router.add_resource("/"))
     cors.add(index_url.add_route("GET", index), {
         "http://0.0.0.0:8080/": aiohttp_cors.ResourceOptions(expose_headers="*",
-                                          allow_headers="*",
-                                          allow_credentials=True, ),
+                                                             allow_headers="*",
+                                                             allow_credentials=True, ),
     })
     ids_resource = cors.add(app.router.add_resource("/get_ids"))
     cors.add(ids_resource.add_route("GET", get_ids), {
         "http://0.0.0.0:8080/": aiohttp_cors.ResourceOptions(expose_headers="*",
-                                          allow_headers="*",
-                                          allow_credentials=True, ),
+                                                             allow_headers="*",
+                                                             allow_credentials=True, ),
     })
     cadastr_info = cors.add(app.router.add_resource("/get_poly"))
     cors.add(cadastr_info.add_route("GET", get_poly), {
         "http://0.0.0.0:8080/": aiohttp_cors.ResourceOptions(expose_headers="*",
-                                          allow_headers="*",
-                                          allow_credentials=True, ),
+                                                             allow_headers="*",
+                                                             allow_credentials=True, ),
     })
 
     logging.basicConfig()
