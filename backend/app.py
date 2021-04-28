@@ -7,6 +7,8 @@ import numpy as np
 from aiohttp import web
 from rosreestr2coord import Area
 
+from config import BASE_DIR
+
 
 def get_poly(request) -> web.Response:
     try:
@@ -29,7 +31,7 @@ def get_poly(request) -> web.Response:
 
 
 def get_ids(request) -> web.Response:
-    with open(f"{os.path.dirname(__file__)}/cadastr_ids.txt", 'r') as file:
+    with open(f"{BASE_DIR}/backend/cadastr_ids.txt", 'r') as file:
         file = file.read()
     ids = file.split(', ')
     return web.json_response({"ids": ids})
@@ -37,12 +39,12 @@ def get_ids(request) -> web.Response:
 
 def index(request):
     return web.FileResponse(
-        f'{os.path.dirname(os.path.realpath(__file__))}/build/index.html')
+        f'{BASE_DIR}/front/build/index.html')
 
 
 def favicon(request):
     return web.FileResponse(
-        f'{os.path.dirname(os.path.realpath(__file__))}/build/favicon.ico')
+        f'{BASE_DIR}/front/build/favicon.ico')
 
 
 def init_app():
@@ -52,7 +54,7 @@ def init_app():
         "http://0.0.0.0:8080/": aiohttp_cors.ResourceOptions(),
     })
     app.router.add_static('/static/',
-                          f'{os.path.dirname(os.path.realpath(__file__))}/build/static/',
+                          f'{BASE_DIR}/front/build/static/',
                           name='static')
 
     index_url = cors.add(app.router.add_resource("/"))
