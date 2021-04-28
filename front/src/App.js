@@ -8,14 +8,14 @@ const App = () => {
   const [ coords, setCoords ] = useState([]);
 
   useEffect(() => {
-    fetch('0.0.0.0:8080/get_ids')
+    fetch('/get_ids')
       .then((response) => response.json())
       .then((data) => setOptions(data.ids))
       .catch((error) => console.log(error));
   }, []);
 
   const onSearch = (value) => {
-    fetch(`0.0.0.0:8080/get_poly?cadastr_id=${value}`)
+    fetch(`/get_poly?cadastr_id=${value}`)
       .then((response) => response.json())
       .then((data) => {
         setType(data.features[0].geometry.type);
