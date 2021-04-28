@@ -8,18 +8,18 @@ const App = () => {
   const [ coords, setCoords ] = useState([]);
 
   useEffect(() => {
-    fetch('http://0351ea900f46.ngrok.io/get_ids')
+    fetch('0.0.0.0:8080/get_ids')
       .then((response) => response.json())
       .then((data) => setOptions(data.ids))
       .catch((error) => console.log(error));
   }, []);
 
   const onSearch = (value) => {
-    fetch(`http://0351ea900f46.ngrok.io/get_poly?cadastr_id=${value}`)
+    fetch(`0.0.0.0:8080/get_poly?cadastr_id=${value}`)
       .then((response) => response.json())
       .then((data) => {
-        setType(data.features.geometry.type);
-        setCoords(data.features.geometry.coordinates);
+        setType(data.features[0].geometry.type);
+        setCoords(data.features[0].geometry.coordinates[0]);
       })
       .catch((error) => console.log(error));
   }
@@ -27,7 +27,7 @@ const App = () => {
   return (
     <Container>
       <Form onSearch={(value) => onSearch(value)} options={options} />
-      <Map type={coords} coords={type} />
+      <Map type={type} coordinates={coords} />
     </Container>
   );
 }
