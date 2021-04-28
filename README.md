@@ -1,6 +1,8 @@
 # test-show-kadastr
 Отображение на карте полигона объекта, полученного по кадастровому номеру
 
+### сборка фронтенда
+yarn build
 ## скачиваем библиотеку
 git clone https://github.com/rendrom/rosreestr2coord 
 ## переходим в нее
