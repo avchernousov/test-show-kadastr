@@ -7,7 +7,7 @@ const Map = ({ coordinates, type, center: centerData }) => {
   const [ center, setCenter ] = useState([55.75, 37.57]);
 
   useEffect(() => {
-    if (coordinates.length) {
+    if (coordinates.length && centerData.length) {
       setCoords(coordinates);
       setCenter(centerData);
     }

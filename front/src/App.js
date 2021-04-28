@@ -21,7 +21,7 @@ const App = () => {
       .then((data) => {
         setType(data.features[0].geometry.type);
         setCoords(data.features[0].geometry.coordinates[0]);
-        setCenter(data.features[0].crs.properties.center);
+        setCenter(data.features[0].properties.center);
       })
       .catch((error) => console.log(error));
   }
@@ -29,7 +29,10 @@ const App = () => {
   return (
     <Container>
       <Form onSearch={(value) => onSearch(value)} options={options} />
-      <Map type={type} coordinates={coords} center={[center.y, center.x]} />
+      <Map 
+        type={type}
+        coordinates={coords}
+        center={center && Object.keys(center).length ? [center.y, center.x] : []} />
     </Container>
   );
 }
