@@ -22,4 +22,4 @@ cd ../
 
 
 ## Запуск тестов
-pytest ./tests.py
+pytest ./backend/tests.py 
