@@ -11,11 +11,11 @@ yarn build
 ## Переходим в корневой каталог
 `cd ../`
 ## Создание виртуального окружения
-`python -m venv ./.env`
+`python -m venv venv`
 ## Активация виртуального окружения для Linux and MacOS
-`. ./.env/bin/activate`
+`. venv/bin/activate`
 ## Активация виртуального окружения для Windows
-`./.env/Scripts/activate`
+`"venv/Scripts/activate"`
 ## Установка зависимостей
 `pip install -r requirements.txt`
 
