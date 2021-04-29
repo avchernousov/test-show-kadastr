@@ -19,3 +19,7 @@ cd ../
 
 ## Запуск приложения
 `python ./main.py`
+
+
+## Запуск тестов
+pytest ./tests.py

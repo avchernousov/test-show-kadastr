@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 
 import aiohttp_cors as aiohttp_cors
 import numpy as np
@@ -15,9 +14,12 @@ def get_poly(request) -> web.Response:
         cadastr_id = request.query['cadastr_id']
     except KeyError as e:
         return web.json_response({"error": "Incorrect parameter"})
-    area = Area(cadastr_id)
 
+    area = Area(cadastr_id)
+    if "xy" not in area.__dict__:
+        area = Area(cadastr_id)
     data = json.loads(area.to_geojson_poly())
+
     busCoord = np.array(data['geometry']['coordinates'])
     busCoord = busCoord[..., ::-1]
     data['geometry']['coordinates'] = busCoord.tolist()
