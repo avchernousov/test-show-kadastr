@@ -51,32 +51,12 @@ def favicon(request):
 
 def init_app():
     app = web.Application()
-
-    cors = aiohttp_cors.setup(app, defaults={
-        "http://0.0.0.0:8080/": aiohttp_cors.ResourceOptions(),
-    })
     app.router.add_static('/static/',
                           f'{BASE_DIR}/front/build/static/',
                           name='static')
-
-    index_url = cors.add(app.router.add_resource("/"))
-    cors.add(index_url.add_route("GET", index), {
-        "http://0.0.0.0:8080/": aiohttp_cors.ResourceOptions(expose_headers="*",
-                                                             allow_headers="*",
-                                                             allow_credentials=True, ),
-    })
-    ids_resource = cors.add(app.router.add_resource("/get_ids"))
-    cors.add(ids_resource.add_route("GET", get_ids), {
-        "http://0.0.0.0:8080/": aiohttp_cors.ResourceOptions(expose_headers="*",
-                                                             allow_headers="*",
-                                                             allow_credentials=True, ),
-    })
-    cadastr_info = cors.add(app.router.add_resource("/get_poly"))
-    cors.add(cadastr_info.add_route("GET", get_poly), {
-        "http://0.0.0.0:8080/": aiohttp_cors.ResourceOptions(expose_headers="*",
-                                                             allow_headers="*",
-                                                             allow_credentials=True, ),
-    })
+    app.router.add_route('GET', '/', index)
+    app.router.add_route('GET', '/get_poly', get_poly)
+    app.router.add_route('GET', '/get_ids', get_ids)
 
     logging.basicConfig()
     return app
