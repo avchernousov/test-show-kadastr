@@ -8,10 +8,8 @@ cd ./front
 yarn install
 yarn build
 ```
-## Скачиваем библиотеку
-`git clone https://github.com/rendrom/rosreestr2coord `
-## Переходим в нее
-`cd ./rosreestr2coord`
+## переходим в корневой католг
+cd ../
 ## Создание виртуального окружения
 `python -m venv ./.env`
 ## Активация виртуального окружения (Linux and MacOS)
