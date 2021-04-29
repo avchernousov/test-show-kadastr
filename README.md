@@ -12,8 +12,10 @@ yarn build
 `cd ../`
 ## Создание виртуального окружения
 `python -m venv ./.env`
-## Активация виртуального окружения (Linux and MacOS)
+## Активация виртуального окружения для Linux and MacOS
 `. ./.env/bin/activate`
+## Активация виртуального окружения для Windows
+`./.env/Scripts/activate`
 ## Установка зависимостей
 `pip install -r requirements.txt`
 
