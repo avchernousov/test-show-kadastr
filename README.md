@@ -24,4 +24,7 @@ yarn build
 
 
 ## Запуск тестов
-`pytest ./tests.py`
+```
+cd backend
+pytest ./tests.py
+```
