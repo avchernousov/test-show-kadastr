@@ -1,7 +1,7 @@
 from aiohttp.test_utils import AioHTTPTestCase, unittest_run_loop
 
 
-class ResAPITestCase(AioHTTPTestCase):
+class RestAPITestCase(AioHTTPTestCase):
     async def get_application(self):
         from backend.app import init_app
         return init_app()
